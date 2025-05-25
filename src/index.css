@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+@import "tailwindcss";
+
+@utility container {
+  margin-inline: auto;
+  padding-inline: 9rem;
+  padding: 0 1rem;
+}
+
+
+
+@theme {
+
+
+  /* project colors */
+
+  --color-Primary1: #363738;
+  --color-secondary: #F5F5F5;
+  --color-secondary1: #FEFAF1;
+  --color-text: #FAFAFA;
+  --color-text1: #7D8184;
+  --color-secondary2: #DB4444;
+  --color-Button1: #00FF66;
+  --color-Button2: #DB4444;
+  --color-Hover-button: #E07575;
+  --color-Hover-button1: #A0BCE0;
+
+  /* fonts */
+  --font-Poppins: "Poppins", sans-serif;
+  --font-Inter: "Inter", sans-serif;
+
+  
+  /* breakipoints */
+  --breakpoint-*: initial;
+  --breakpoint-sm: 575px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1170px;
+
+}
