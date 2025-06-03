@@ -26,25 +26,25 @@ import { GoHeart } from "react-icons/go";
 //     },
 // ]
 
-const activeStyle = ({ isActive }) => {
-    return isActive
-        ? "text-[16px] text-[#00000] underline leading-[24px] tracking-[0.2px]"
-        : "text-[16px] text-[#00000] leading-[24px] tracking-[0.2px]"
-}
+const ActiveStyle = ({ isActive }) => {
+    return isActive 
+      ? "text-[16px] leading-[24px] text-red-500 relative group " 
+      : "text-[16px] leading-[24px] text-black hover:text-blue-300 relative group ";
+  };
 
 const Navbar = () => {
     return (
-        <nav className='pt-[47px] pb-[27px]'>
+        <nav className='pt-[47px] pb-[27px] border-b border-b-[rgba(0,0,0,0.40)]'>
             <div className="container">
                 <div className='grid grid-cols-[1fr_auto_1fr] justify-center items-center '>
                     <div className='mr-[182px]'>
                         <img className='h-[24px] w-[124px] ' src="logo.png" alt="" />
                     </div>
                     <ul className='flex gap-[30px]'>
-                        <NavLink to={"/"} className={activeStyle}>Home</NavLink>
-                        <NavLink to={"/contact"} className={activeStyle}>Contact</NavLink>
-                        <NavLink to={"/about"} className={activeStyle}>About</NavLink>
-                        <NavLink to={"/sign_up"} className={activeStyle}>Sign Up</NavLink>
+                        <NavLink to={"/"} className={ActiveStyle}>Home</NavLink>
+                        <NavLink to={"/contact"} className={ActiveStyle}>Contact</NavLink>
+                        <NavLink to={"/about"} className={ActiveStyle}>About</NavLink>
+                        <NavLink to={"/sign_up"} className={ActiveStyle}>Sign Up</NavLink>
                     </ul>
                     <div className='flex gap-[20px]'>
                         <form className='ml-[128px] flex' action="">
