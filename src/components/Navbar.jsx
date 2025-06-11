@@ -27,10 +27,12 @@ import { GoHeart } from "react-icons/go";
 // ]
 
 const ActiveStyle = ({ isActive }) => {
-    return isActive 
-      ? "text-[16px] leading-[24px] text-red-500 relative group " 
-      : "text-[16px] leading-[24px] text-black hover:text-blue-300 relative group ";
-  };
+  return isActive
+    ? "text-[16px] leading-[24px]  relative after:content-[''] after:block after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:bg-black after:w-full"
+    : "text-[16px] leading-[24px] text-black relative group hover:text-blue-300 after:content-[''] after:block after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:bg-black after:w-0 group-hover:after:w-full after:transition-all after:duration-300";
+};
+
+
 
 const Navbar = () => {
     return (

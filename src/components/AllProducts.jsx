@@ -1,10 +1,10 @@
 import { FaRegHeart, FaStar } from "react-icons/fa";
 import { IoEyeOutline } from "react-icons/io5";
 
-const AllProducts = ({ img, sale, className, star, heading, price, originalPrice, rate }) => {
+const AllProducts = ({ img, sale, className, star, heading, price, originalPrice, rate,}) => {
   return (
-    <div className="transition-all duration-300 hover:shadow-xl hover:scale-[1.02] rounded-lg overflow-hidden mx-[15px]">
-      <div className="bg-[#F5F5F5] relative h-[250px] mb-[16px] cursor-pointer group">
+    <div className=" mx-[15px]">
+      <div className="bg-[#F5F5F5] relative h-[250px] mb-[16px] cursor-pointer group transition-all duration-300 hover:shadow-xl hover:scale-[1.02] rounded-lg overflow-hidden">
         <div className="flex justify-center items-center h-full overflow-hidden">
           <img
             className={`my-[50px] object-cover transition-transform duration-500 ease-in-out group-hover:scale-110 ${className}`}
@@ -12,8 +12,8 @@ const AllProducts = ({ img, sale, className, star, heading, price, originalPrice
             alt=""
           />
         </div>
-        <div className="bg-Button2 py-[4px] px-[12px] absolute top-[12px] left-[12px] font-Poppins font-normal text-[12px] leading-[18px] text-white rounded">
-          {sale}
+        <div className="">
+          {sale? <div className="bg-Button2 py-[4px] px-[12px] absolute top-[12px] left-[12px] font-Poppins font-normal text-[12px] leading-[18px] text-white rounded">{sale}</div> : null}
         </div>
         <div className="absolute flex flex-col gap-[8px] top-[12px] right-[12px]">
           {[<FaRegHeart />, <IoEyeOutline />].map((Icon, i) => (
@@ -32,7 +32,8 @@ const AllProducts = ({ img, sale, className, star, heading, price, originalPrice
       </div>
       <div>
         <h3 className="font-Poppins font-medium text-[16px] leading-[24px]">{heading}</h3>
-        <div className="flex gap-[12px] my-[12px]">
+        <div>
+          <div className="flex gap-[12px] my-[12px]">
           <h6 className="font-Poppins font-medium text-[16px] leading-[24px] text-secondary2">{price}</h6>
           <h6 className="font-Poppins font-medium text-[16px] leading-[24px] text-gray-500 line-through">{originalPrice}</h6>
         </div>
@@ -42,7 +43,7 @@ const AllProducts = ({ img, sale, className, star, heading, price, originalPrice
               <li key={i} className={`text-yellow-300 ${star}`}><FaStar /></li>
             ))}
           </ul>
-          <h6 className="font-Poppins font-medium text-[16px] leading-[24px] text-gray-500">{rate}</h6>
+          <h6 className="font-Poppins font-medium text-[16px] leading-[24px] text-gray-500">{rate}</h6></div>
         </div>
       </div>
     </div>

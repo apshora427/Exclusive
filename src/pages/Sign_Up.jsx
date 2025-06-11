@@ -6,23 +6,28 @@ import Button from "../components/Button"
 import OutlineButton from "../components/OutlineButton"
 import { Link } from "react-router"
 import { useState } from "react"
+import { UseUser } from "../context/UserContext"
+
 
 
 
 const Sign_Up = () => {
-const [newUser, setNewUser] = useState({
-        name: "",
-        email: "",
-        password: "",
-    })
-
-    const handleSignUp = (e)=> {
-        e.preventDefault();
-        console.log(newUser);
-        
-    }
+  const { currentUser, addUser, googleSignUp } = UseUser()
 
 
+  const [newUser, setNewUser] = useState({
+    name: "",
+    email: "",
+    password: "",
+  })
+
+  const handleSignUp = (e) => {
+    e.preventDefault();
+    addUser(newUser.name, newUser.email, newUser.password)
+    console.log(currentUser);
+
+  }
+  const handleChange = (e) => setNewUser({ ...newUser, [e.target.name]: e.target.value })
   return (
     <section>
       <Top_Header />
@@ -36,25 +41,27 @@ const [newUser, setNewUser] = useState({
           <p className="font-Poppins font-normal text-[16px] mt-[24px] mb-[48px]">Enter your details below</p>
 
           <form action="" className="grid grid-cols-1 gap-5">
-             <Input 
-                    onChange={(e)=> setNewUser({...newUser, [e.target.name]: e.target.value})} 
-                    value={newUser.name} type="text" placeholder='Name' name="name" />
+            <Input
+              onChange={(e) => handleChange(e)}
+              value={newUser.name} type="text" placeholder='Name' name='name' />
 
-                    <Input onChange={(e)=> setNewUser({...newUser, [e.target.name]: e.target.value})}
-                     type="email" placeholder='Email or Phone Number' name="email" value={newUser.email} />
+            <Input onChange={(e) => handleChange(e)}
+              type="email" placeholder='Email or Phone Number' value={newUser.email} name='email' />
 
-                    <Input onChange={(e)=> setNewUser({...newUser, [e.target.name]: e.target.value})}
-                     type="password" placeholder='Password' name="password" value={newUser.password} />
+            <Input onChange={(e) => handleChange(e)}
+              type="password" placeholder='Password' value={newUser.password} name='password' />
 
 
             <Button
-            className="w-[400px]"
+              className="w-[400px]"
               TagName={"button"}
-              type="submit">
+              type="submit"
+              onClick={handleSignUp}
+            >
               Create Account
             </Button>
 
-            <OutlineButton TagName={"button"} className="w-[400px]">
+            <OutlineButton onClick={()=> googleSignUp()} TagName={"button"} className="w-[400px]">
               <img src="Google.png" alt="icon" />
               Sign up with Google
             </OutlineButton>

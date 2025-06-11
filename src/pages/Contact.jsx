@@ -1,4 +1,6 @@
+import Footer from "../components/Footer"
 import Heading from "../components/Heading"
+import Massage from "../components/Massage"
 import Navbar from "../components/Navbar"
 import Top_Header from "../components/Top_Header"
 
@@ -7,6 +9,8 @@ import Top_Header from "../components/Top_Header"
     <div>
       <Top_Header/>
       <Navbar/>
+      <Massage/>
+      <Footer/>
     </div>
   )
 }

@@ -4,13 +4,13 @@ import Contact from "./pages/Contact";
 import About from "./pages/About";
 import Sign_Up from "./pages/Sign_Up";
 import Log_In from "./pages/Log_In";
-import { ThemeProvider } from "./context/ThemeContext";
+
 
 
 const App = () => {
   return (
   
-     <ThemeProvider>
+   
        <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -21,7 +21,7 @@ const App = () => {
         </Routes>
       </BrowserRouter>
   
-     </ThemeProvider>
+    
   )
 }
 export default App

@@ -1,37 +1,36 @@
-import React, { useRef } from 'react';
-import SectionHead from './SectionHead';
-import Clock from './Clock';
-import img_1 from '../assets/F-1.png';
-import img_2 from '../assets/F-2.png';
-import img_3 from '../assets/F-3.png';
-import img_4 from '../assets/F-4.png';
-import AllProducts from './AllProducts';
-import Slider from "react-slick";
+import img_1 from '../assets/E-1.png'
+import img_2 from '../assets/E-2.png'
+import img_3 from '../assets/E-3.png'
+import img_4 from '../assets/E-4.png'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
+import React, { useRef } from 'react';
+import Slider from "react-slick";
+import SectionHead from './SectionHead';
+import AllProducts from './AllProducts';
 
-const FlashSale = () => {
-  const targetDate = '2025-06-15T00:00:00';
-  const sliderRef = useRef(null);
 
-  const settings = {
-    dots: false,
-    lazyLoad: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    initialSlide: 2,
-    arrows: false,  
-  };
 
+const ExploreProducts = () => {
+     const sliderRef = useRef(null);
+    
+      const settings = {
+        dots: false,
+        lazyLoad: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        initialSlide: 2,
+        arrows: false,  
+      };
   return (
-    <section>
+     <section>
       <div className="container">
         <div className='mt-[140px]'>
           <div className='flex items-center justify-between'>
             <div className='flex items-center gap-6'>
-              <SectionHead text={'Today’s'} para={'Flash Sales'} />
-              <Clock targetDate={targetDate} />
+              <SectionHead text={'Our Products'} para={'Explore Our Products'} />
+             
             </div>
             <div className='flex gap-4'>
               <button
@@ -57,10 +56,8 @@ const FlashSale = () => {
               <div>
                 <AllProducts
                   img={img_1}
-                  sale={"-40%"}
-                  heading={"HAVIT HV-G92 Gamepad"}
+                  heading={"Breed Dry Dog Food"}
                   price={"$120"}
-                  originalPrice={"$160"}
                   rate={"(88)"}
                 />
               </div>
@@ -68,30 +65,24 @@ const FlashSale = () => {
                 <AllProducts
                   className={'mt-[70px]'}
                   img={img_2}
-                  sale={"-35%"}
-                  heading={"AK-900 Wired Keyboard"}
+                  heading={"CANON EOS DSLR Camera"}
                   price={"$960"}
-                  originalPrice={"$1160"}
                   rate={"(75)"}
                 />
               </div>
               <div>
                 <AllProducts
                   img={img_3}
-                  sale={"-30%"}
-                  heading={"IPS LCD Gaming Monitor"}
+                  heading={"ASUS FHD Gaming Laptop"}
                   price={"$370"}
-                  originalPrice={"$400"}
                   rate={"(99)"}
                 />
               </div>
               <div>
                 <AllProducts
                   img={img_4}
-                  sale={"-25%"}
-                  heading={"S-Series Comfort Chair "}
+                  heading={"Curology Product Set "}
                   price={"$375"}
-                  originalPrice={"$400"}
                   rate={"(99)"}
                 />
               </div>
@@ -100,7 +91,7 @@ const FlashSale = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default FlashSale;
+export default ExploreProducts

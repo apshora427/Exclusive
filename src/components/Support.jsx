@@ -50,7 +50,7 @@ const SupportBlock = ({ img, Heading, text }) => {
     return (
         <div>
             <div className='flex justify-center items-center'>
-                <div className='bg-Primary1 size-[80px] rounded-[50%] mb-[24px] flex justify-center items-center'>
+                <div className='bg-gray-300 size-[80px] rounded-[50%] mb-[24px] flex justify-center items-center'>
                 <div className='bg-black size-[60px] rounded-[50%] flex justify-center items-center'>
                     <img src={img} alt="" />
                 </div>
