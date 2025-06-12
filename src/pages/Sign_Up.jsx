@@ -7,6 +7,7 @@ import OutlineButton from "../components/OutlineButton"
 import { Link } from "react-router"
 import { useState } from "react"
 import { UseUser } from "../context/UserContext"
+import { ToastContainer, } from 'react-toastify';
 
 
 
@@ -24,12 +25,14 @@ const Sign_Up = () => {
   const handleSignUp = (e) => {
     e.preventDefault();
     addUser(newUser.name, newUser.email, newUser.password)
-    console.log(currentUser);
+    // console.log(currentUser);
 
   }
   const handleChange = (e) => setNewUser({ ...newUser, [e.target.name]: e.target.value })
+ 
   return (
     <section>
+      <ToastContainer/>
       <Top_Header />
       <Navbar />
       <div className="grid grid-cols-[5fr_5fr] mt-[60px]">

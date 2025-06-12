@@ -1,6 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import { createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import {auth} from '../firebase.config'
+import { toast } from "react-toastify";
 
 export const UserContext = createContext()
 
@@ -10,10 +11,15 @@ const UserProvider = ({ children }) => {
   const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?])^[a-zA-Z\d!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]{6,12}$/
   const nameRegex = /^[a-zA-Z]+(?:[-'\s][a-zA-Z]+)*$/
 
-  
+   const toastify = (type, massage)=> {
+    type === "success" && toast.success(massage)
+    type === "error" && toast.error(massage)
+   }
+
 
   function addUser(name, email, password) {
-    if (nameRegex.test(name)) {
+   if (name!==""&& email!== "" && password!=="") {
+     if (nameRegex.test(name)) {
       if (emailRegex.test(email)) {
       if (passwordRegex.test(password)) {
 
@@ -21,24 +27,30 @@ const UserProvider = ({ children }) => {
           .then((userCredential) => {
             // Signed up 
             const user = userCredential.user;
-            console.log(user);
+            toastify("success", "Successfully acount create")
             
           })
           .catch((error) => {
-            // const errorCode = error.code;
+            const errorCode = error.code;
             const errorMessage = error.message;
-            console.log(errorMessage);
+           toastify("error", errorMessage)
+           let m = errorMessage
+           console.log();
+           
             
           });
       } else {
-        alert('password not match')
+        toastify("error", "The password must be strong")
       }
     } else {
-      alert('Email not match')
+     toastify("error", "Invalid Email")
     }
     }else{
-      alert("Invalid Name or any emapty place is not taken")
+      toastify("error", "number, empty place are taken as invalid username")
     }
+   }else{
+    toastify("error", "Please fill up the form fully to sign up in Exclusive")
+   }
   }
   function googleSignUp () {
  const provider = new GoogleAuthProvider(); 

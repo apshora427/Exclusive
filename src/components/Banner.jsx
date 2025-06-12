@@ -3,7 +3,6 @@ import img_1 from "../assets/bannerItem_1.jpg"
 import img_2 from "../assets/bannerItem_2.png"
 import img_3 from "../assets/bannerItem_3.png"
 import { IoChevronForward } from "react-icons/io5"
-import React from "react";
 import Slider from "react-slick";
 
 
