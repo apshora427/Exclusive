@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from "react";
-import { createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import {auth} from '../firebase.config'
+import { createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword  } from "firebase/auth";
+import { auth } from '../firebase.config'
 import { toast } from "react-toastify";
 
 export const UserContext = createContext()
@@ -11,71 +11,85 @@ const UserProvider = ({ children }) => {
   const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?])^[a-zA-Z\d!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]{6,12}$/
   const nameRegex = /^[a-zA-Z]+(?:[-'\s][a-zA-Z]+)*$/
 
-   const toastify = (type, massage)=> {
+  const toastify = (type, massage) => {
     type === "success" && toast.success(massage)
     type === "error" && toast.error(massage)
-   }
+  }
 
 
   function addUser(name, email, password) {
-   if (name!==""&& email!== "" && password!=="") {
-     if (nameRegex.test(name)) {
-      if (emailRegex.test(email)) {
-      if (passwordRegex.test(password)) {
+    if (name !== "" && email !== "" && password !== "") {
+      if (nameRegex.test(name)) {
+        if (emailRegex.test(email)) {
+          if (passwordRegex.test(password)) {
 
-        createUserWithEmailAndPassword(auth, email, password)
-          .then((userCredential) => {
-            // Signed up 
-            const user = userCredential.user;
-            toastify("success", "Successfully acount create")
-            
-          })
-          .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-           toastify("error", errorMessage)
-           let m = errorMessage
-           console.log();
-           
-            
-          });
+            createUserWithEmailAndPassword(auth, email, password)
+              .then((userCredential) => {
+                // Signed up 
+                const user = userCredential.user;
+                toastify("success", "Successfully acount create")
+
+              })
+              .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                
+               if (errorCode.includes("email-already-in-use")) {
+                toastify("error", "email-already-in-used")
+               }
+              });
+          } else {
+            toastify("error", "The password must be strong")
+          }
+        } else {
+          toastify("error", "Invalid Email")
+        }
       } else {
-        toastify("error", "The password must be strong")
+        toastify("error", "number, empty place are taken as invalid username")
       }
     } else {
-     toastify("error", "Invalid Email")
+      toastify("error", "Please fill up the form fully to sign up in Exclusive")
     }
-    }else{
-      toastify("error", "number, empty place are taken as invalid username")
-    }
-   }else{
-    toastify("error", "Please fill up the form fully to sign up in Exclusive")
-   }
   }
-  function googleSignUp () {
- const provider = new GoogleAuthProvider(); 
-signInWithPopup(auth, provider)
-  .then((result) => {
-    // This gives you a Google Access Token. You can use it to access the Google API.
-    const credential = GoogleAuthProvider.credentialFromResult(result);
-    const token = credential.accessToken;
-    // The signed-in user info.
-    const user = result.user;
-    // IdP data available using getAdditionalUserInfo(result)
+  function LogInUser (email, password){
+
+signInWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    console.log(user);
+    
     // ...
-  }).catch((error) => {
-    // Handle Errors here.
+  })
+  .catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
-    // The email of the user's account used.
-    const email = error.customData.email;
-    // The AuthCredential type that was used.
-    const credential = GoogleAuthProvider.credentialFromError(error);
-    // ...
   });
   }
+  function googleSignUp() {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        // The signed-in user info.
+        const user = result.user;
+        // IdP data available using getAdditionalUserInfo(result)
+        // ...
+      }).catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        // ...
+      });
+  }
   return (
-    <UserContext.Provider value={{ currentUser, addUser, googleSignUp }}>
+    <UserContext.Provider value={{ currentUser, addUser, googleSignUp, LogInUser }}>
       {children}
     </UserContext.Provider>
   )
