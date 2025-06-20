@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import { createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword  } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signInWithEmailAndPassword, signOut  } from "firebase/auth";
 import { auth } from '../firebase.config'
 import { toast } from "react-toastify";
 
@@ -52,19 +52,21 @@ const UserProvider = ({ children }) => {
     }
   }
   function LogInUser (email, password){
-
-signInWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
-    console.log(user);
-    
-    // ...
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-  });
+ signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      // Signed in 
+      const user = userCredential.user;
+      setCurrentUser(user)
+      console.log(user);
+      
+      // ...
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorMessage);
+      
+    });
   }
   function googleSignUp() {
     const provider = new GoogleAuthProvider();
@@ -88,8 +90,11 @@ signInWithEmailAndPassword(auth, email, password)
         // ...
       });
   }
+  function logOut () {
+    signOut(auth)
+  }
   return (
-    <UserContext.Provider value={{ currentUser, addUser, googleSignUp, LogInUser }}>
+    <UserContext.Provider value={{ currentUser, addUser, googleSignUp, LogInUser, logOut }}>
       {children}
     </UserContext.Provider>
   )

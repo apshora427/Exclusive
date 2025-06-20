@@ -5,6 +5,7 @@ import { GoHeart } from "react-icons/go";
 import { FaRegUser } from "react-icons/fa";
 import UserMenu from './UserMenu';
 import { UseUser } from '../context/UserContext';
+import { signOut } from 'firebase/auth';
 
 // const menus = [
 //     {
@@ -38,7 +39,20 @@ const ActiveStyle = ({ isActive }) => {
 
 
 const Navbar = () => {
-   const {currentUser} = UseUser()
+    const { currentUser, logOut } = UseUser()
+
+    let avater;
+
+    if (currentUser?.photoURL) {
+        avater = <img src={currentUser.photoURL} alt="" />
+    } 
+    else if (currentUser?.email) {
+        avater = <span>{currentUser.email.slice(0, 1)}</span>
+    }
+    else {
+        avater = <FaRegUser />
+    }
+
     return (
         <nav className='pt-[47px] pb-[27px] border-b border-b-[rgba(0,0,0,0.40)]'>
             <div className="container">
@@ -69,14 +83,14 @@ const Navbar = () => {
                         </div>
                         <div className="flex justify-center items-center gap-[17px] relative group">
                             <span className='text-[15px] cursor-pointer text-white size-[32px] rounded-full bg-Button2 flex justify-center items-center'>
-                                {currentUser? <span>{currentUser.email.slice(0,1)}</span> : <FaRegUser/>}
+                                {avater}
                             </span>
                             <div className=' absolute right-[15px] bottom-[-193px] 
         opacity-0 translate-y-[-10px] 
         group-hover:opacity-100 group-hover:translate-y-0 
         transition-all duration-300 ease-out 
         z-50 pointer-events-none group-hover:pointer-events-auto'>
-                                <UserMenu />
+                                <UserMenu onClick={logOut}/>
                             </div>
                         </div>
 
